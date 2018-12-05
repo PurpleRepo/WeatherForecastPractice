@@ -10,4 +10,25 @@ import Foundation
 
 class CityViewModel {
     
+    var cityModelArray = Array<CityModel>()
+    
+    
+    
+    func fetchCityModels(completion: @escaping () -> Void)
+    {
+        // api call
+    }
+    
+    func getCityModelArrayCount() -> Int
+    {
+        return cityModelArray.count
+    }
+    
+    func getCityModel(at index: Int) -> CityModel?
+    {
+        if index >= 0 && index < cityModelArray.count {
+            return cityModelArray[index]
+        }
+        return nil
+    }
 }

@@ -9,11 +9,12 @@
 import Foundation
 import CoreLocation
 
-class CityWeatherViewModel: NSObject, CLLocationManagerDelegate {
+class CityWeatherViewModel: NSObject {
     
     var locationManager = CLLocationManager()
     
     var cityWeatherModelArray = Array<CityWeatherModel>()
+    var coordinates: CLLocationCoordinate2D?
     
     override init()
     {
@@ -22,6 +23,7 @@ class CityWeatherViewModel: NSObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 30
+        locationManager.requestLocation()
     }
     
     func fetchPreferredCityWeatherModels(completion: @escaping () -> Void)
@@ -40,5 +42,16 @@ class CityWeatherViewModel: NSObject, CLLocationManagerDelegate {
             return cityWeatherModelArray[index]
         }
         return nil
+    }
+}
+
+extension CityWeatherViewModel: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        coordinates = locationManager.location?.coordinate
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print(error.localizedDescription)
     }
 }
