@@ -37,7 +37,8 @@ extension CitiesListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        
+        cell.textLabel?.text = cityModel.name
+        cell.detailTextLabel?.text = cityModel.country
         
         return cell
     }

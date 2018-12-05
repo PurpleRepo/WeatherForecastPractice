@@ -12,11 +12,9 @@ class CityViewModel {
     
     var cityModelArray = Array<CityModel>()
     
-    
-    
     func fetchCityModels(completion: @escaping () -> Void)
     {
-        // api call
+        
     }
     
     func getCityModelArrayCount() -> Int
