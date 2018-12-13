@@ -12,6 +12,6 @@ import UIKit
 struct CityWeatherModel {
     
     let cityModel: CityModel
-    let forecastModel: ForecastModel
+    let forecastModelArray: Array<ForecastModel>
     var cityImage: UIImage?
 }

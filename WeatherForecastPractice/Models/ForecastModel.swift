@@ -7,11 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
 struct ForecastModel {
     
-    let id: Int
-    let weatherType: String
-    let description: String
-    let icon: String
+    let unixTime: Int               // "dt"
+    let weatherType: String         // "main"
+    let description: String         // "description"
+    let icon: String                // "icon"
+    var iconImage: UIImage?         // (loaded image)
+    let temperature: Double         // "temp"
+    let windSpeed: Double           // "speed" 
 }

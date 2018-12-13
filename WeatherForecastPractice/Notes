@@ -1,0 +1,28 @@
+This app is meant to be an example for the MVVM architectural design pattern.
+
+*** Currently always loads the cities list from scratch when going to add city view controller.
+    - Should cache the list.
+*** Need to get the unix date and display respective days for weather in 5 day forecast.
+*** Need to change the api call to strictly 5 day so that when changing to the 5 day forecast ViewController, it will not make the call there and wait for it to load.
+*** Need to store city ID's and load them upon starting the app.
+*** Need to use Kingfisher for loading the images from the web.
+*** Need to fix the formatting of city name strings to catch spaces for URL's.
+
+Wish to change the app to striclty employ the use of the SearchBarController for listing the cities in the PreferredCitiesViewController.
+
+
+    Would like to display the minimum, maximum and current temperature for the forecast for each day in the 5 day forecast.
+
+Temperature is listed in Kelvin by default. (ADDED "&units=imperial" to remedy this.)
+Formula to Fahrenheit: (<X>°F − 32) × 5/9 + 273.15 = <Y>°K
+
+5 Day 3 Hour Forecast (8 Forecasts/Day -> 40 Forecasts; 0...39)
+
+@CitiesListViewController.swift
+    -> When adding a city (rowSelectedAt), does not check to see if the PreferredCitiesWeatherViewController has it listed already.
+@ProfileManager.swift
+    -> Does not import profile (saved city ID's).
+    -> Does not save profile (preferred city ID's).
+
+Currently, a 5 day report fetches 40 individual forecasts.
+    This information could be displayed as an animation along with a slider for the time of day and a Play/Pause button.

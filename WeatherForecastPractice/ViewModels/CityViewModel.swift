@@ -14,7 +14,12 @@ class CityViewModel {
     
     func fetchCityModels(completion: @escaping () -> Void)
     {
-        
+        WeatherAPIHandler.sharedInstance.fetchCitiesFromLocalCache()
+        {
+            (cityModelArray) in
+            self.cityModelArray = cityModelArray
+            completion()
+        }
     }
     
     func getCityModelArrayCount() -> Int
