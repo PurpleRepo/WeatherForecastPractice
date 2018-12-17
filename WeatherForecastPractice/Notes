@@ -5,6 +5,7 @@ This app is meant to be an example for the MVVM architectural design pattern.
 *** Need to get the unix date and display respective days for weather in 5 day forecast.
 *** Need to change the api call to strictly 5 day so that when changing to the 5 day forecast ViewController, it will not make the call there and wait for it to load.
 *** Need to store city ID's and load them upon starting the app.
+*** Need to download icon images.
 *** Need to use Kingfisher for loading the images from the web.
 *** Need to fix the formatting of city name strings to catch spaces for URL's.
 

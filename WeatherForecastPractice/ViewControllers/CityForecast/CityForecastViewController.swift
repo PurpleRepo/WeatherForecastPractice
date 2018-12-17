@@ -53,7 +53,6 @@ class CityForecastViewController: UIViewController {
         forecastUIArray[4].append(day5Label)
         forecastUIArray[4].append(day5WeatherIcon)
         forecastUIArray[4].append(day5TemperatureLabel)
-        print("init CityForecastViewController")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,12 +65,14 @@ class CityForecastViewController: UIViewController {
         cityForecastViewModel?.loadFiveDayForecast()
         {
             () in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEE"
             for day in 0..<self.forecastUIArray.count {
                 let forecastModel = self.cityForecastViewModel?.getForecastOfDay(dayIndex: day)
                 if let temperature = forecastModel?.temperature {
                     let formattedTemp = String(format: "%.1f", temperature)
-                    // set the day string based on the time
-                    let dayString = "Mon"
+                    let date = Date(timeIntervalSince1970: Double(forecastModel?.unixTime ?? 0))
+                    let dayString = dateFormatter.string(from: date)
                     DispatchQueue.main.async {
                         (self.forecastUIArray[day][0] as! UILabel).text = dayString
                         (self.forecastUIArray[day][1] as! UIImageView).image = forecastModel?.iconImage

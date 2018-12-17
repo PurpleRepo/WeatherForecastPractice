@@ -8,21 +8,33 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class UnsplashImageParser {
     
-    class func parseImage(jsonResult: Dictionary<String, Any>) -> UIImage?
+    class func parseImage(jsonResult: Dictionary<String, Any>, completion: @escaping (UIImage?) -> Void)
     {
         guard let arrayOfResults = jsonResult["results"] as? Array<Dictionary<String, Any>> else {
-            return nil
+            completion(nil)
+            return
         }
         guard let urls = arrayOfResults[0]["urls"] as? Dictionary<String, Any> else {
-            return nil
+            completion(nil)
+            return
         }
         guard let fullURL = urls["full"] as? String else {
-            return nil
+            completion(nil)
+            return
         }
-        print(fullURL)
-        return UIImage(contentsOfFile: fullURL)
+        guard let url = URL(string: fullURL) else {
+            completion(nil)
+            return
+        }
+        
+        KingfisherManager.shared.retrieveImage(with: url, options: nil, progressBlock: nil)
+        {
+            (image, error, cacheType, urlRef) in
+            completion(image)
+        }
     }
 }

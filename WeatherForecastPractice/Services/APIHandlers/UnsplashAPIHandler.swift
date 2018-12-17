@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import Kingfisher
 
 class UnsplashAPIHandler {
     
@@ -21,7 +22,8 @@ class UnsplashAPIHandler {
     
     func getURLStringOfCityLocation(city: String) -> String
     {
-        return String(format: unsplashAPICallFormat, city, unsplashAPIAccessKey)
+        let cityURLCompatible = city.replacingOccurrences(of: " ", with: "%20")
+        return String(format: unsplashAPICallFormat, cityURLCompatible, unsplashAPIAccessKey)
     }
     
     func fetchPicture(of city: String, completion: @escaping (UIImage?) -> Void)
@@ -39,7 +41,11 @@ class UnsplashAPIHandler {
             if error == nil {
                 do {
                     if let jsonResult = try JSONSerialization.jsonObject(with: data!, options: []) as? Dictionary<String, Any> {
-                        completion(UnsplashImageParser.parseImage(jsonResult: jsonResult))
+                        UnsplashImageParser.parseImage(jsonResult: jsonResult)
+                        {
+                            (image) in
+                            completion(image)
+                        }
                     } else {
                         completion(nil)
                     }

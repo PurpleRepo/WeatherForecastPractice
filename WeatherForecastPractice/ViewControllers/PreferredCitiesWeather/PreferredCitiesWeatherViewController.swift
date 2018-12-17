@@ -80,7 +80,6 @@ extension PreferredCitiesWeatherViewController: UITableViewDelegate {
         tableView.cellForRow(at: indexPath)?.isSelected = false
         if let controller = storyboard?.instantiateViewController(withIdentifier: "CityForecastViewController") as? CityForecastViewController {
             controller.cityForecastViewModel = CityForecastViewModel(cityWeatherModel: preferredCitiesWeatherViewModel.getCityWeatherModel(at: indexPath.row)!)
-            print("declaring new CityForeCastViewController")
             navigationController?.pushViewController(controller, animated: true)
         }
     }

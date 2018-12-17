@@ -79,12 +79,17 @@ class PreferredCitiesWeatherViewModel {
         WeatherAPIHandler.sharedInstance.fetchCurrentForecast(for: cityModel)
         {
             (cityWeatherModel) in
-            guard let cityWeatherModel = cityWeatherModel else {
+            guard var cityWeatherModel = cityWeatherModel else {
                 completion()
                 return
             }
-            self.cityWeatherModelArray.append(cityWeatherModel)
-            completion()
+            UnsplashAPIHandler.sharedInstance.fetchPicture(of: cityWeatherModel.cityModel.name)
+            {
+                (image) in
+                cityWeatherModel.cityImage = image
+                self.cityWeatherModelArray.append(cityWeatherModel)
+                completion()
+            }
         }
     }
     

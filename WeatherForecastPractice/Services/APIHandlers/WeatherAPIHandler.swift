@@ -22,8 +22,6 @@ class WeatherAPIHandler {
     
     let cityReferenceFileName = "city.list"
     
-    
-    
     private init(){}
     
     func getForecastURLString(forecastType: String, cityID: Int) -> String
@@ -95,7 +93,7 @@ class WeatherAPIHandler {
             completion(nil)
             return
         }
-        print(urlString)
+//        print(urlString)
         let dataTask = URLSession.shared.dataTask(with: url)
         {
             (data, response, error) in
